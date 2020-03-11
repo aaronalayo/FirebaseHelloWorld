@@ -89,4 +89,58 @@ class CloudStorage{
         map["body"] = body
         newDoc.setData(map)
     }
+    
+    static func uploadImage(imageUrl: NSURL) {
+        // File located on disk
+        let localFile = imageUrl
+        
+        // Create a reference to the file you want to upload
+        if let imageName = imageUrl.lastPathComponent {
+            let imageRef = storage.reference().child("image/\(imageName)")
+            
+        
+            let uploadTask = imageRef.putFile(from: localFile as URL, metadata: nil) { metadata, error in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    print("error uploading file:\(localFile)")
+                    return
+            
+                }
+                print("succesfully uploaded file:\(metadata)")
+                
+            }
+            uploadTask.resume()
+        }
+    }
+    
+    
 }
+/*
+ extension UIImage{
+     func getImageType() {
+        let imageData = self.pngData();
+        let str = self.contentType(for: imageData)
+
+    }
+
+    func contentType(for data: NSData) -> String {
+//        var c = UnsafeMutablePointer<UInt8>.allocate(capacity: 8)
+        var c : UnsafeMutablePointer<UInt8>? = nil
+        data.getBytes(&c, length: 1)
+        switch (c) {
+            case 0xFF:
+                    return "image/jpeg"
+            case 0x89:
+                    return "image/png"
+            case 0x47:
+                    return "image/gif"
+            case 0x49:
+                break;
+            case 0x42:
+                return "image/bmp"
+            case 0x4D:
+                return "image/tiff"
+        }
+        return "";
+    }
+}*/

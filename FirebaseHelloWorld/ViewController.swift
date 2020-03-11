@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, UITextViewDelegate{
     
   
     @IBOutlet weak var img: UIImageView!
@@ -24,7 +24,9 @@ class ViewController: UIViewController{
         
         let note = CloudStorage.getNoteAt(index: rowNumber)
         headLine.text = note.head
+        headLine.delegate = self
         body.text = note.body
+        body.delegate = self
         if note.image != "empty"{
             CloudStorage.downloadImage(name: note.image, vc: self)
         }else{
@@ -52,18 +54,41 @@ class ViewController: UIViewController{
 
     
     
-    @IBAction func downloadBtnPressed(_ sender: UIButton) {
-//
-//
-//        CloudStorage.downloadImage(name: images.randomElement()!, vc:self)
-//
-//
+    @IBAction func cameraBtnPressed(_ sender: UIButton) {
+        
+        CameraHandler.shared.showActionSheet(vc: self)
+        CameraHandler.shared.imagePickedBlock = { (image, imageUrl) in
+            CloudStorage.uploadImage(imageUrl: imageUrl)
+        }
+        
     }
     
     
     
+    //MARK:-- UITextView Delegate Methods
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print(" begin editing \(textView.text ?? "")")
+    }
     
+    func textViewDidChange(_ textView: UITextView) {
+        print(" did edit \(textView.text ?? "")")
+    }
    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == headLine {
+            print(" did edited headLine \(textView.text ?? "")")
+            
+        }else {
+            print(" did edited body \(textView.text ?? "")")
+        }
+        updateStorage()
+    }
+    
+    func updateStorage() {
+        CloudStorage.updateNote(index: rowNumber, head: headLine.text, body: body.text)
+    }
+    
+    
     
 }
 

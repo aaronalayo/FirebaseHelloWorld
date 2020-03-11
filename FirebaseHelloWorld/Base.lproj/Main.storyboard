@@ -16,17 +16,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tdn-at-PsU">
-                                <rect key="frame" x="87" y="167" width="214" height="227"/>
+                                <rect key="frame" x="45" y="167" width="318" height="527"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="227" id="Wnh-4y-BzP"/>
+                                    <constraint firstAttribute="height" constant="527" id="Wnh-4y-BzP"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell1" id="9vf-sb-pPw">
-                                        <rect key="frame" x="0.0" y="28" width="214" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="318" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9vf-sb-pPw" id="sdy-H9-ZBQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="214" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -36,8 +36,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Tdn-at-PsU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="79" id="1Ig-jC-Jen"/>
-                            <constraint firstItem="Tdn-at-PsU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="Mpd-XX-Au5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tdn-at-PsU" secondAttribute="trailing" constant="113" id="g5m-SE-pqM"/>
+                            <constraint firstItem="Tdn-at-PsU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="45" id="Mpd-XX-Au5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tdn-at-PsU" secondAttribute="trailing" constant="51" id="g5m-SE-pqM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -51,7 +51,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Tdn-at-PsU" id="tGv-Sh-GE6"/>
-                        <outlet property="view" destination="sdy-H9-ZBQ" id="4Yr-Bi-wya"/>
+                        <outlet property="view" destination="8bC-Xf-vdC" id="SHg-MH-OlW"/>
                         <segue destination="cAe-P7-bMf" kind="show" identifier="segue1" id="k9h-bx-TmE"/>
                     </connections>
                 </viewController>
@@ -69,7 +69,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="body here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tM0-U0-wtk">
                                 <rect key="frame" x="87" y="328" width="240" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -104,10 +104,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wYa-4c-oGa"/>
                     </view>
-                    <navigationItem key="navigationItem" id="z1Y-iM-ko2"/>
+                    <navigationItem key="navigationItem" id="z1Y-iM-ko2">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Teo-jC-hwa">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="IDd-XV-uBG">
+                                <rect key="frame" x="338" y="0.0" width="56" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="camera" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraBtnPressed:" destination="cAe-P7-bMf" eventType="touchUpInside" id="sJF-rK-BdX"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="body" destination="tM0-U0-wtk" id="XbC-dE-o1Z"/>
                         <outlet property="headLine" destination="a7z-K7-Gp8" id="DSy-mz-KNz"/>
+                        <outlet property="view" destination="Qfx-ae-tfu" id="nbJ-PZ-fpg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3d-71-yf3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -134,4 +148,7 @@
             <point key="canvasLocation" x="598.55072463768124" y="4.6875"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="64" height="48"/>
+    </resources>
 </document>
