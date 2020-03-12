@@ -22,19 +22,21 @@ class ViewController: UIViewController, UITextViewDelegate{
         super.viewDidLoad()
         //Use rowNumber to get the right Note object
         
-        let note = CloudStorage.getNoteAt(index: rowNumber)
-        headLine.text = note.head
-        headLine.delegate = self
-        body.text = note.body
-        body.delegate = self
-        if note.image != "empty"{
-            CloudStorage.downloadImage(name: note.image, vc: self)
-        }else{
+        if let note = CloudStorage.getNoteAt(index: rowNumber) {
+            headLine.text = note.head
+            headLine.delegate = self
+            body.text = note.body
+            body.delegate = self
             
-            print("note is empty")
+            if note.image != "empty"{
+                CloudStorage.downloadImage(name: note.image, vc: self)
+            }else{
+                
+                print("note is empty")
+            }
         }
     }
-        
+    
         
            
 //        CloudStorage.startListener(tableView: tableView)
@@ -51,19 +53,20 @@ class ViewController: UIViewController, UITextViewDelegate{
     @IBAction func btnClicked(_ sender: UIButton) {
         CloudStorage.createNote(head: "New Head Line", body: "New Body")
     }
-
     
-    
-    @IBAction func cameraBtnPressed(_ sender: UIButton) {
-        
+ 
+    @IBAction func camPressed(_ sender: Any) {
         CameraHandler.shared.showActionSheet(vc: self)
+        weak var weakSelf = self //instance of the viewController
         CameraHandler.shared.imagePickedBlock = { (image, imageUrl) in
-            CloudStorage.uploadImage(imageUrl: imageUrl)
-        }
-        
+            if let strongSelf = weakSelf { // avoid retention cycle to avoid memory leak
+                strongSelf.img.image = image
+                
+            }
+            
+                CloudStorage.uploadImage(imageUrl: imageUrl)
+             }   
     }
-    
-    
     
     //MARK:-- UITextView Delegate Methods
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -89,6 +92,7 @@ class ViewController: UIViewController, UITextViewDelegate{
     }
     
     
+   
     
 }
 

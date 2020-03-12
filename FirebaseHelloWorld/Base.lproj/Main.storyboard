@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tdn-at-PsU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tdn-at-PsU">
                                 <rect key="frame" x="45" y="167" width="318" height="527"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -42,14 +42,31 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Notes" id="q1C-ZT-efa">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="edit" id="qCz-uE-TmI"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Qb4-85-jaS">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="edit" id="qCz-uE-TmI">
                             <connections>
-                                <action selector="addPressed:" destination="BYZ-38-t0r" id="d3x-S1-NaN"/>
+                                <action selector="startEditing:" destination="BYZ-38-t0r" id="epZ-JL-aVX"/>
                             </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="Qb4-85-jaS">
+                                <connections>
+                                    <action selector="addPressed:" destination="BYZ-38-t0r" id="d3x-S1-NaN"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="pNp-lW-aU2">
+                                <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Q3n-De-rhj">
+                                    <rect key="frame" x="333.5" y="11" width="20" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="trash" catalog="system"/>
+                                    <connections>
+                                        <action selector="deleteRows:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iEf-c9-4XQ"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="Q3n-De-rhj" id="dRN-OS-YVk"/>
                         <outlet property="tableView" destination="Tdn-at-PsU" id="tGv-Sh-GE6"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="SHg-MH-OlW"/>
                         <segue destination="cAe-P7-bMf" kind="show" identifier="segue1" id="k9h-bx-TmE"/>
@@ -74,12 +91,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vo3-0w-nQo">
-                                <rect key="frame" x="87" y="559" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="gJy-8g-vZM"/>
-                                </constraints>
-                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="headline" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="a7z-K7-Gp8">
                                 <rect key="frame" x="87" y="151" width="240" height="53"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -87,11 +98,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vo3-0w-nQo">
+                                <rect key="frame" x="87" y="501" width="240" height="317"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="317" id="gJy-8g-vZM"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tM0-U0-wtk" firstAttribute="leading" secondItem="wYa-4c-oGa" secondAttribute="leading" constant="87" id="4c6-Uh-lRE"/>
-                            <constraint firstItem="wYa-4c-oGa" firstAttribute="bottom" secondItem="Vo3-0w-nQo" secondAttribute="bottom" constant="175" id="8tT-0w-bce"/>
+                            <constraint firstItem="wYa-4c-oGa" firstAttribute="bottom" secondItem="Vo3-0w-nQo" secondAttribute="bottom" constant="44" id="8tT-0w-bce"/>
                             <constraint firstItem="Vo3-0w-nQo" firstAttribute="trailing" secondItem="tM0-U0-wtk" secondAttribute="trailing" id="BCL-Fq-9XY"/>
                             <constraint firstItem="a7z-K7-Gp8" firstAttribute="top" secondItem="wYa-4c-oGa" secondAttribute="top" constant="63" id="CXD-Yg-5So"/>
                             <constraint firstItem="Vo3-0w-nQo" firstAttribute="leading" secondItem="tM0-U0-wtk" secondAttribute="leading" id="DEP-9v-7j8"/>
@@ -105,22 +122,16 @@
                         <viewLayoutGuide key="safeArea" id="wYa-4c-oGa"/>
                     </view>
                     <navigationItem key="navigationItem" id="z1Y-iM-ko2">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Teo-jC-hwa">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="IDd-XV-uBG">
-                                <rect key="frame" x="338" y="0.0" width="56" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="camera" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
-                                </state>
-                                <connections>
-                                    <action selector="cameraBtnPressed:" destination="cAe-P7-bMf" eventType="touchUpInside" id="sJF-rK-BdX"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="camera" id="Teo-jC-hwa">
+                            <connections>
+                                <action selector="camPressed:" destination="cAe-P7-bMf" id="YbD-KK-QJb"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="body" destination="tM0-U0-wtk" id="XbC-dE-o1Z"/>
                         <outlet property="headLine" destination="a7z-K7-Gp8" id="DSy-mz-KNz"/>
+                        <outlet property="img" destination="Vo3-0w-nQo" id="c08-t0-3jS"/>
                         <outlet property="view" destination="Qfx-ae-tfu" id="nbJ-PZ-fpg"/>
                     </connections>
                 </viewController>
@@ -149,6 +160,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera" catalog="system" width="64" height="48"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
     </resources>
 </document>

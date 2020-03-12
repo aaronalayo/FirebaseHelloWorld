@@ -8,7 +8,9 @@
 //
 import UIKit
 class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,18 +23,37 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
     }
     
+    
+    @IBAction func startEditing(_ sender: Any) {
+        
+        tableView.isEditing = !tableView.isEditing
+        deleteButton.isHidden = !tableView.isEditing
+    }
+    
+    @IBAction func deleteRows(_ sender: UIButton) {
+        
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            
+            for indexPath in selectedRows {
+                
+                CloudStorage.deleteNote(at: indexPath.row)
+                
+            }
+            tableView.reloadData()  
+        }
+    }
     @IBAction func addPressed(_ sender: UIButton) { // to make a new Note
         CloudStorage.createNote(head: "New Head Line", body: "New Body")
         print("created note")
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CloudStorage.getSize()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
-        cell?.textLabel?.text = CloudStorage.getNoteAt(index: indexPath.row).head
+        cell?.textLabel?.text = CloudStorage.getNoteAt(index: indexPath.row)?.head
         return cell!
     }
     
@@ -44,8 +65,18 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected row number \(indexPath.row)")
-        performSegue(withIdentifier: "segue1", sender: self)
+        if !tableView.isEditing {
+            performSegue(withIdentifier: "segue1", sender: self)
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

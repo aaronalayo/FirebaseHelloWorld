@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4FEC12378A0F201A05549409 /* Pods_FirebaseHelloWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6668372D73DC3D1A4BC64AD /* Pods_FirebaseHelloWorld.framework */; };
 		5A070DBA240949E4008857E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A070DB9240949E4008857E8 /* AppDelegate.swift */; };
 		5A070DBC240949E4008857E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A070DBB240949E4008857E8 /* SceneDelegate.swift */; };
 		5A070DBE240949E4008857E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A070DBD240949E4008857E8 /* ViewController.swift */; };
@@ -19,6 +18,7 @@
 		93D678C4240DA66F00ACD63C /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D678C3240DA66F00ACD63C /* CloudStorage.swift */; };
 		93D678C7240DA6B400ACD63C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D678C6240DA6B400ACD63C /* Note.swift */; };
 		BB1207162419209500C97C9D /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1207152419209500C97C9D /* CameraHandler.swift */; };
+		CD8B6ABC214F1C9F938B241E /* Pods_FirebaseHelloWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE9B68297CA80D4271DDCF8 /* Pods_FirebaseHelloWorld.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +36,8 @@
 		93D678BC240D9D5E00ACD63C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93D678C3240DA66F00ACD63C /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		93D678C6240DA6B400ACD63C /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		AFE9B68297CA80D4271DDCF8 /* Pods_FirebaseHelloWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseHelloWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1207152419209500C97C9D /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
-		C6668372D73DC3D1A4BC64AD /* Pods_FirebaseHelloWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseHelloWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FEC12378A0F201A05549409 /* Pods_FirebaseHelloWorld.framework in Frameworks */,
+				CD8B6ABC214F1C9F938B241E /* Pods_FirebaseHelloWorld.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +55,7 @@
 		51C402B00A441881E6830C51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C6668372D73DC3D1A4BC64AD /* Pods_FirebaseHelloWorld.framework */,
+				AFE9B68297CA80D4271DDCF8 /* Pods_FirebaseHelloWorld.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,7 +133,7 @@
 				5A070DB2240949E3008857E8 /* Sources */,
 				5A070DB3240949E3008857E8 /* Frameworks */,
 				5A070DB4240949E3008857E8 /* Resources */,
-				D2EE93378CC168029E86061B /* [CP] Embed Pods Frameworks */,
+				AB10ED33D1C3C463E779165B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,6 +192,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AB10ED33D1C3C463E779165B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirebaseHelloWorld/Pods-FirebaseHelloWorld-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirebaseHelloWorld/Pods-FirebaseHelloWorld-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirebaseHelloWorld/Pods-FirebaseHelloWorld-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B657B7D76726CFD381220E49 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,23 +225,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D2EE93378CC168029E86061B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirebaseHelloWorld/Pods-FirebaseHelloWorld-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirebaseHelloWorld/Pods-FirebaseHelloWorld-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirebaseHelloWorld/Pods-FirebaseHelloWorld-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
