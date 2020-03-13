@@ -98,19 +98,38 @@ class CloudStorage{
     }
  
    
-    static func deleteNote(id:String) {
+    static func deleteNote(id: String) {
         let docRef = db.collection(notes).document(id)
         
         docRef.delete()
     }
     
-    static func deleteNote(at index:Int) {
-        if let noteId =  getNoteAt(index: index)?.id{
-            deleteNote(id: noteId)
+    static func deleteNote(at index: Int) {
+        if let note = getNoteAt(index: index) {
+            
+            deleteNote(id: note.id)
+            deleteImage(with: "image/\(note.image)")
         }
     }
     
-    static func updateNote(index: Int, head: String, body: String, imageUrl: String? = "empty") {
+    static func deleteImage(with path: String) {
+        
+        // Create a reference to the file to delete
+        let desertRef = storage.reference().child(path)
+        
+        // Delete the file
+        desertRef.delete { error in
+            if error != nil {
+                print("Error deleting the image \(path)")
+    
+            } else {
+                print("Image \(path) deleted succesfully")
+            }
+            
+        }
+    }
+    
+    static func updateNote(index: Int, head: String, body: String, imageUrl: String?) {
         let note = list[index]
         let docRef = db.collection(notes).document(note.id)
         var map = [String:String]()

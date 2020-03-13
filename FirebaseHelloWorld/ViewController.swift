@@ -4,7 +4,7 @@
 //
 //  Created by Mac_8 on 28/02/2020.
 //  Copyright © 2020 aAron. All rights reserved.
-//
+//This correspond to week 9 and week 10 assigments
 
 import UIKit
 
@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITextViewDelegate{
             body.delegate = self
             if note.image != "empty"{
                 CloudStorage.downloadImage(name: note.image, vc: self)
-                print(note.image)
+                
             }else {
                 print("note is empty")
             }
@@ -79,8 +79,10 @@ class ViewController: UIViewController, UITextViewDelegate{
     }
     
     func updateStorage() {
-        CloudStorage.updateNote(index: rowNumber, head: headLine.text, body: body.text)
+        if let note = CloudStorage.getNoteAt(index: rowNumber) {
+            CloudStorage.updateNote(index: rowNumber, head: headLine.text, body: body.text, imageUrl: note.image )
+        }
+        
     }
-    
-}
 
+}
