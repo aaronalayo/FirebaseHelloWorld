@@ -44,6 +44,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     @IBAction func addPressed(_ sender: UIButton) { // to make a new Note
         CloudStorage.createNote(head: "New Head Line", body: "New Body")
+        
         print("created note")
     }
 
@@ -54,6 +55,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
         cell?.textLabel?.text = CloudStorage.getNoteAt(index: indexPath.row)?.head
+        
         return cell!
     }
     
@@ -69,16 +71,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             performSegue(withIdentifier: "segue1", sender: self)
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 

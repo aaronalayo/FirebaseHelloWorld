@@ -27,34 +27,21 @@ class ViewController: UIViewController, UITextViewDelegate{
             headLine.delegate = self
             body.text = note.body
             body.delegate = self
-            
             if note.image != "empty"{
                 CloudStorage.downloadImage(name: note.image, vc: self)
-            }else{
-                
+                print(note.image)
+            }else {
                 print("note is empty")
             }
+                
         }
-    }
     
-        
-           
-//        CloudStorage.startListener(tableView: tableView)
-//        CloudStorage.createNote(head: "new note", body: "new body")
-//        images.append("m1.jpg")
-//        images.append("m2.jpg")
-//        images.append("m3.jpg")
-////        CloudStorage.deleteNote(id: "1ADRue6WlsIboORSo5Dm")
-////        CloudStorage.updateNote(index: 0, head: "new headLine", body: "something")
+    }
+ 
+//    @IBAction func btnClicked(_ sender: UIButton) {
+//        CloudStorage.createNote(head: "New Head Line", body: "New Body")
 //    }
-
- 
-
-    @IBAction func btnClicked(_ sender: UIButton) {
-        CloudStorage.createNote(head: "New Head Line", body: "New Body")
-    }
     
- 
     @IBAction func camPressed(_ sender: Any) {
         CameraHandler.shared.showActionSheet(vc: self)
         weak var weakSelf = self //instance of the viewController
@@ -62,10 +49,14 @@ class ViewController: UIViewController, UITextViewDelegate{
             if let strongSelf = weakSelf { // avoid retention cycle to avoid memory leak
                 strongSelf.img.image = image
                 
+                if let note = CloudStorage.getNoteAt(index: strongSelf.rowNumber) {
+                    if let name = imageUrl.lastPathComponent {
+                        CloudStorage.updateNote(index: strongSelf.rowNumber, head: note.head, body: note.body, imageUrl: name)
+                    }
+                }
             }
-            
-                CloudStorage.uploadImage(imageUrl: imageUrl)
-             }   
+            CloudStorage.uploadImage(imageUrl: imageUrl)
+        }
     }
     
     //MARK:-- UITextView Delegate Methods
@@ -90,9 +81,6 @@ class ViewController: UIViewController, UITextViewDelegate{
     func updateStorage() {
         CloudStorage.updateNote(index: rowNumber, head: headLine.text, body: body.text)
     }
-    
-    
-   
     
 }
 

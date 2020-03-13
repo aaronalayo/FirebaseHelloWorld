@@ -18,25 +18,50 @@ class CloudStorage{
     private static let notes = "notes"
     
     
-    static func downloadImage(name: String, vc: ViewController){
-         print("download called...")
-               let imgRef = storage.reference(withPath: name) // get "filehandle"
-               imgRef.getData(maxSize: 4000000) { (data, error) in
-                   if error == nil {
-                       print("success downloading image !")
-                       let img = UIImage(data: data!)
-                       DispatchQueue.main.async { // prevent background thread from
-                           // interrupting the main thread, which handles user input
-                           vc.img.image = img
-                       }
-                   } else {
-                       print("some error downloading \(error.debugDescription)")
-                   }
-                   
-               }
-               
-           }
+//    static func downloadImage(name: String, vc: ViewController){
+//         print("download called...")
+//
+//        let storageRef = storage.reference()
+//        if let imageName = imageUrl.lastPathComponent {
+//               let imgRef = storageRef.child("images/\(imageName)") // get "filehandle"
+//                print("found image")
+//               imgRef.getData(maxSize: 4000000) { (data, error) in
+//                   if error == nil {
+//                       print("success downloading image !")
+//                       let img = UIImage(data: data!)
+//                       DispatchQueue.main.async { // prevent background thread from
+//                           // interrupting the main thread, which handles user input
+//                           vc.img.image = img
+//                       }
+//                   } else {
+//                       print("some error downloading \(error.debugDescription)")
+//                   }
+//
+//               }
+//        }
+//
+//           }
+//
     
+    static func downloadImage(name: String, vc:ViewController){
+          print("download called...")
+            
+          let imgRef = storage.reference(withPath: "image/\(name)") // get "filehandle"
+        imgRef.getData(maxSize: 8000000) { (data, error) in
+              if error == nil {
+                  print("success downloading image !")
+                  let img = UIImage(data: data!)
+                  DispatchQueue.main.async { // prevent background thread from
+                      // interrupting the main thread, which handles user input
+                      vc.img.image = img
+                  }
+              } else {
+                  print("some error downloading \(error.debugDescription)")
+              }
+              
+          
+           }
+      }
     static func getSize() -> Int{
            return list.count
        }
@@ -85,19 +110,21 @@ class CloudStorage{
         }
     }
     
-    static func updateNote(index: Int, head: String, body: String) {
+    static func updateNote(index: Int, head: String, body: String, imageUrl: String? = "empty") {
         let note = list[index]
         let docRef = db.collection(notes).document(note.id)
         var map = [String:String]()
         map["head"] = head
         map["body"] = body
+        map["image"] = imageUrl
         docRef.setData(map)
     }
-    static func createNote(head: String, body: String) {
+    static func createNote(head: String, body: String, imageUrl: String? = "empty") {
         let newDoc = db.collection(notes).document()
         var map = [String:String]()
         map["head"] = head
         map["body"] = body
+        map["image"] = imageUrl
         newDoc.setData(map)
     }
     
@@ -126,32 +153,3 @@ class CloudStorage{
     
     
 }
-/*
- extension UIImage{
-     func getImageType() {
-        let imageData = self.pngData();
-        let str = self.contentType(for: imageData)
-
-    }
-
-    func contentType(for data: NSData) -> String {
-//        var c = UnsafeMutablePointer<UInt8>.allocate(capacity: 8)
-        var c : UnsafeMutablePointer<UInt8>? = nil
-        data.getBytes(&c, length: 1)
-        switch (c) {
-            case 0xFF:
-                    return "image/jpeg"
-            case 0x89:
-                    return "image/png"
-            case 0x47:
-                    return "image/gif"
-            case 0x49:
-                break;
-            case 0x42:
-                return "image/bmp"
-            case 0x4D:
-                return "image/tiff"
-        }
-        return "";
-    }
-}*/
