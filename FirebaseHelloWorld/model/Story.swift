@@ -1,22 +1,20 @@
 //
-//  Note.swift
+//  Story.swift
 //  FirebaseHelloWorld
 //
-//  Created by Aaron ALAYO on 02/03/2020.
+//  Created by Aaron ALAYO on 18/03/2020.
 //  Copyright © 2020 aAron. All rights reserved.
 //
 
 import Foundation
-class Note{
+class Story{
     
-    var id: String
-    var head: String
-    var body: String
+    var title: String
+    var content: String
     var image:String
-    init (id:String, head:String, body:String, image:String){
-        self.id = id
-        self.head = head
-        self.body = body
+    init (title:String, content:String, image:String){
+        self.title = title
+        self.content = content
         self.image = image
     }
     
@@ -24,3 +22,5 @@ class Note{
         return image.count > 0 // returns true, if there is some image-name string
     }
 }
+
+

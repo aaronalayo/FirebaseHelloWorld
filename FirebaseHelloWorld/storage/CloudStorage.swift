@@ -10,6 +10,10 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 
+protocol CloudStorageDownloadDelegate {
+    func imageDownload(image: UIImage)
+}
+
 class CloudStorage{
     
     private static var list = [Note]()
@@ -18,50 +22,26 @@ class CloudStorage{
     private static let notes = "notes"
     
     
-//    static func downloadImage(name: String, vc: ViewController){
-//         print("download called...")
-//
-//        let storageRef = storage.reference()
-//        if let imageName = imageUrl.lastPathComponent {
-//               let imgRef = storageRef.child("images/\(imageName)") // get "filehandle"
-//                print("found image")
-//               imgRef.getData(maxSize: 4000000) { (data, error) in
-//                   if error == nil {
-//                       print("success downloading image !")
-//                       let img = UIImage(data: data!)
-//                       DispatchQueue.main.async { // prevent background thread from
-//                           // interrupting the main thread, which handles user input
-//                           vc.img.image = img
-//                       }
-//                   } else {
-//                       print("some error downloading \(error.debugDescription)")
-//                   }
-//
-//               }
-//        }
-//
-//           }
-//
-    
-    static func downloadImage(name: String, vc:ViewController){
-          print("download called...")
-            
-          let imgRef = storage.reference(withPath: "image/\(name)") // get "filehandle"
+    static func downloadImage(name: String, vc: CloudStorageDownloadDelegate){
+        print("download called...")
+        let imgRef = storage.reference(withPath: "image/\(name)") // get "filehandle"
         imgRef.getData(maxSize: 8000000) { (data, error) in
-              if error == nil {
-                  print("success downloading image !")
-                  let img = UIImage(data: data!)
-                  DispatchQueue.main.async { // prevent background thread from
-                      // interrupting the main thread, which handles user input
-                      vc.img.image = img
-                  }
-              } else {
-                  print("some error downloading \(error.debugDescription)")
-              }
-              
-          
-           }
-      }
+            if error == nil {
+                print("success downloading image !")
+                let img = UIImage(data: data!)
+                DispatchQueue.main.async { // prevent background thread from
+                    // interrupting the main thread, which handles user input
+                    if let imageDownloaded = img {
+                        vc.imageDownload(image: imageDownloaded)
+                        
+                    } else {
+                        print("some error downloading \(error.debugDescription)")
+                    }
+                    
+                }
+            }
+        }
+    }
     static func getSize() -> Int{
            return list.count
        }

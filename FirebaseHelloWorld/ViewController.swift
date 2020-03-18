@@ -8,7 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextViewDelegate{
+class ViewController: UIViewController, UITextViewDelegate, CloudStorageDownloadDelegate {
+    
+    
+    func imageDownload(image: UIImage) {
+        img.image = image
+    }
+    
     
   
     @IBOutlet weak var img: UIImageView!
@@ -37,10 +43,6 @@ class ViewController: UIViewController, UITextViewDelegate{
         }
     
     }
- 
-//    @IBAction func btnClicked(_ sender: UIButton) {
-//        CloudStorage.createNote(head: "New Head Line", body: "New Body")
-//    }
     
     @IBAction func camPressed(_ sender: Any) {
         CameraHandler.shared.showActionSheet(vc: self)

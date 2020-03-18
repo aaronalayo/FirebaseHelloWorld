@@ -64,6 +64,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             destination.rowNumber = tableView.indexPathForSelectedRow!.row
         }
     }
+    @IBAction func custom(_ sender: UIButton) {
+        performSegue(withIdentifier: "segue2", sender: self)
+    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected row number \(indexPath.row)")
@@ -72,6 +76,5 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 
-    
 }
 
