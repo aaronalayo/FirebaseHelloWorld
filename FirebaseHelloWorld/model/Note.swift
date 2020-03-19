@@ -21,6 +21,6 @@ class Note{
     }
     
     func hasImage() -> Bool {
-        return image.count > 0 // returns true, if there is some image-name string
+        return image.count > 0 && image != "empty" // returns true, if there is some image-name string
     }
 }

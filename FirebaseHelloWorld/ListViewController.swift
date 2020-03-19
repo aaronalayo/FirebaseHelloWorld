@@ -11,7 +11,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var custom = false
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self // we handle events for the tableview
@@ -53,10 +53,28 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
-        cell?.textLabel?.text = CloudStorage.getNoteAt(index: indexPath.row)?.head
-        
-        return cell!
+        let rawCell = tableView.dequeueReusableCell(withIdentifier: "cell1")
+        if custom {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as? TableViewCellLabelImage {
+                if let note = CloudStorage.getNoteAt(index: indexPath.row) {
+                    cell.label1.text = note.head
+                    cell.bodyView.text = note.body
+                    cell.imgView.image = nil
+                    
+                    if note.hasImage() {
+                        let indicator = UIActivityIndicatorView(frame: cell.imageContainerView.frame)
+                        cell.imageContainerView.addSubview(indicator)
+                        indicator.startAnimating()
+                        CloudStorage.downloadImage(name: note.image, vc: cell)
+                        
+                    }
+                   return cell
+                }
+            }
+        } else {
+            rawCell?.textLabel?.text = CloudStorage.getNoteAt(index: indexPath.row)?.head
+        }
+        return rawCell!
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,7 +83,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     @IBAction func custom(_ sender: UIButton) {
-        performSegue(withIdentifier: "segue2", sender: self)
+        custom = !custom
+        tableView.reloadData()
     }
     
     
@@ -75,6 +94,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             performSegue(withIdentifier: "segue1", sender: self)
         }
     }
+    
+    
 
 }
 

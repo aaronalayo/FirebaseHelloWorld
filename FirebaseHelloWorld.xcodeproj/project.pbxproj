@@ -13,7 +13,6 @@
 		5A070DC1240949E4008857E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A070DBF240949E4008857E8 /* Main.storyboard */; };
 		5A070DC3240949E6008857E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A070DC2240949E6008857E8 /* Assets.xcassets */; };
 		5A070DC6240949E6008857E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A070DC4240949E6008857E8 /* LaunchScreen.storyboard */; };
-		88DA4CF52420DE9E009C7FFD /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DA4CF42420DE9E009C7FFD /* ViewController2.swift */; };
 		88DA4CF724216B85009C7FFD /* TableViewCellLabelImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DA4CF624216B85009C7FFD /* TableViewCellLabelImage.swift */; };
 		88DA4CF9242195C8009C7FFD /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DA4CF8242195C8009C7FFD /* Story.swift */; };
 		9331623E24127A07002F6996 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9331623D24127A07002F6996 /* ListViewController.swift */; };
@@ -35,7 +34,6 @@
 		5A070DC2240949E6008857E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A070DC5240949E6008857E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A070DC7240949E6008857E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88DA4CF42420DE9E009C7FFD /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		88DA4CF624216B85009C7FFD /* TableViewCellLabelImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellLabelImage.swift; sourceTree = "<group>"; };
 		88DA4CF8242195C8009C7FFD /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		9331623D24127A07002F6996 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				BB1207152419209500C97C9D /* CameraHandler.swift */,
 				5A070DBD240949E4008857E8 /* ViewController.swift */,
 				9331623D24127A07002F6996 /* ListViewController.swift */,
-				88DA4CF42420DE9E009C7FFD /* ViewController2.swift */,
 				5A070DBF240949E4008857E8 /* Main.storyboard */,
 				88DA4CF624216B85009C7FFD /* TableViewCellLabelImage.swift */,
 				5A070DC2240949E6008857E8 /* Assets.xcassets */,
@@ -244,7 +241,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB1207162419209500C97C9D /* CameraHandler.swift in Sources */,
-				88DA4CF52420DE9E009C7FFD /* ViewController2.swift in Sources */,
 				93D678C7240DA6B400ACD63C /* Note.swift in Sources */,
 				5A070DBE240949E4008857E8 /* ViewController.swift in Sources */,
 				9331623E24127A07002F6996 /* ListViewController.swift in Sources */,
